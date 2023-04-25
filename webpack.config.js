@@ -3,25 +3,36 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: {
+    index: path.resolve(__dirname, './src/index.js'),
+  },
   devServer: {
     static: './dist',
+    port: 3000,
+    open: true,
+    compress: true,
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: path.resolve(__dirname, './src/index.html'),
     }),
   ],
   output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, './dist'),
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+        use: ['file-loader'],
       },
     ],
   },
