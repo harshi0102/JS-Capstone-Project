@@ -74,4 +74,4 @@ const getShazamTracks = async () => {
   }
 };
 
-getShazamTracks();
+export default getShazamTracks;
