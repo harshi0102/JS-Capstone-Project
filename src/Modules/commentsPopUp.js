@@ -9,14 +9,20 @@ const commentsPopUp = () => {
     popup.classList.add('popup');
 
     const closeBtn = document.createElement('div');
-    closeBtn.classList.add('close-btn');
+    closeBtn.classList.add('close-btn', 'text-4xl', 'py-2', 'cursor-pointer', 'text-right' );
     closeBtn.innerHTML = '&times;';
-    closeBtn.addEventListener('click', () => popup.remove());
+    closeBtn.addEventListener('click', () => {popup.remove();
+      pop.setAttribute('style', 'display: none;');
+    });
+
+    const popupImgContainer = document.createElement('div');
+    popupImgContainer.classList.add('img-container');
 
     const popupImg = document.createElement('img');
     popupImg.src = data.images?.coverart || data.images?.background;
 
     const popupTitle = document.createElement('h3');
+    popupTitle.classList.add('text-3xl', 'font-bold')
     popupTitle.innerHTML = data.title;
 
     const commentsTitle = document.createElement('h3');
@@ -27,7 +33,7 @@ const commentsPopUp = () => {
     if (comments[data.title]) {
       comments[data.title].forEach((comment) => {
         const commentItem = document.createElement('li');
-        commentItem.innerHTML = `<strong>${comment.name}:</strong> ${comment.comment}`;
+        commentItem.innerHTML = `<strong>${comment.comment} : </strong>  ${comment.name}`;
         commentList.appendChild(commentItem);
       });
     } else {
@@ -87,7 +93,8 @@ const commentsPopUp = () => {
 
     const popupContent = document.createElement('div');
     popupContent.classList.add('popup-content');
-    popupContent.appendChild(popupImg);
+    popupImgContainer.appendChild(popupImg);
+    popupContent.appendChild(popupImgContainer);
     popupContent.appendChild(popupTitle);
     popupContent.appendChild(commentsTitle);
     popupContent.appendChild(commentList);

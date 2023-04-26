@@ -1,10 +1,7 @@
 import commentsPopUp from './Modules/commentsPopUp.js';
 
 const cards = document.getElementById('cards');
-const customTitle = (title) => {
-  const newTitle = title.slice(0, 27);
-  return newTitle;
-};
+
 const getShazamTracks = async () => {
   const url = 'https://shazam.p.rapidapi.com/charts/track?locale=en-US&pageSize=20&startFrom=0';
   const options = {
@@ -30,11 +27,7 @@ const getShazamTracks = async () => {
               <img class="h-[250px] w-auto mx-auto" src="${data.images?.coverart || data.images?.background}" />
             </div>
             <div class="flex flex-col gap-2 justify-between">
-              <h2 class="font-semibold capitalize">${
-  data.title.length < 30
-    ? data.title
-    : `${customTitle(data.title)}...`
-}</h2>
+              <h2 class="font-semibold capitalize">${data.title}</h2>
               <div class="flex flex-col gap-1 justify-between">
                 <div class="flex justify-between p-1 items-center">
                   <img
