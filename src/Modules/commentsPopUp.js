@@ -9,9 +9,10 @@ const commentsPopUp = () => {
     popup.classList.add('popup');
 
     const closeBtn = document.createElement('div');
-    closeBtn.classList.add('close-btn', 'text-4xl', 'py-2', 'cursor-pointer', 'text-right' );
+    closeBtn.classList.add('close-btn', 'text-4xl', 'py-2', 'cursor-pointer', 'text-right');
     closeBtn.innerHTML = '&times;';
-    closeBtn.addEventListener('click', () => {popup.remove();
+    closeBtn.addEventListener('click', () => {
+      popup.remove();
       pop.setAttribute('style', 'display: none;');
     });
 
@@ -22,7 +23,7 @@ const commentsPopUp = () => {
     popupImg.src = data.images?.coverart || data.images?.background;
 
     const popupTitle = document.createElement('h3');
-    popupTitle.classList.add('text-3xl', 'font-bold')
+    popupTitle.classList.add('text-3xl', 'font-bold');
     popupTitle.innerHTML = data.title;
 
     const commentsTitle = document.createElement('h3');

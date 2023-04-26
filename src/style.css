@@ -21,6 +21,7 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+
   /* transition: all 0.3s ease; */
   backdrop-filter: blur(5px);
   padding: 3%;
@@ -38,7 +39,7 @@
   margin-right: auto;
 }
 
-.img-container  {
+.img-container {
   overflow: hidden;
   max-height: 45vh;
 }
@@ -47,48 +48,51 @@
   width: 100%;
 }
 
-.popup-content{
+.popup-content {
   background-color: black;
   padding: 10px;
-  display:flex !important;
-  flex-direction:column !important;
+  display: flex !important;
+  flex-direction: column !important;
   justify-content: center !important;
-  border-style:solid;
-  border-width:2px;
-  border-color:white;
-  text-align:center;
-  gap:3px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: white;
+  text-align: center;
+  gap: 3px;
 }
-.h3class{
+
+.h3class {
   text-align: center;
 }
-.addh3comment{
-  text-align:center;
-}
-.comment-input{
-  color:black;
-  width:50%;
-  height:5vh;
-}
-.name-input{
-  color:black;
-  width:50%;
-  height:30vh;
-}
-.comment-list{
-  text-align:center;
 
+.addh3comment {
+  text-align: center;
 }
 
-form{
-  display:flex;
-  flex-direction:column;
-  gap:13px;
+.comment-input {
+  color: black;
+  width: 50%;
+  height: 5vh;
+}
+
+.name-input {
+  color: black;
+  width: 50%;
+  height: 30vh;
+}
+
+.comment-list {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
   margin-left: 2%;
 }
 
-form>button{
-  width:30%;
-  border:1px solid white;
-  
+form > button {
+  width: 30%;
+  border: 1px solid white;
 }
