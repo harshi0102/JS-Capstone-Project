@@ -1,41 +1,39 @@
-const cards = document.getElementById('cards');
+import commentsPopUp from './Modules/commentsPopUp.js';
 
+const cards = document.getElementById('cards');
+const customTitle = (title) => {
+  const newTitle = title.slice(0, 27);
+  return newTitle;
+};
 const getShazamTracks = async () => {
   const url = 'https://shazam.p.rapidapi.com/charts/track?locale=en-US&pageSize=20&startFrom=0';
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': 'd0af0bcdb1msh4547e68b9e65aa2p16dec0jsnbc6afde93c67',
+      'X-RapidAPI-Key': '093e23bdf9msh3bfd5f803bf6009p1e4395jsnb2a13a58d78b',
       'x-rapidapi-host': 'shazam.p.rapidapi.com',
     },
   };
-
   try {
     const response = await fetch(url, options);
     const result = await response.json();
-
-    const songs = result.tracks;
-
-    let htmlToAppend = '';
-
-    songs.forEach((data) => {
-      const card = `
-                     
-              <div
+    if (result && result.tracks) {
+      const songs = result.tracks;
+      localStorage.setItem('songs', JSON.stringify(songs));
+      let htmlToAppend = '';
+      songs.forEach((data) => {
+        const card = `
+          <div
             class="flex flex-col gap-2 p-4 h-full rounded-2xl bg-[#1C1F26] drop-shadow-md border-2 border-[#a8b3cf33;] hover:border-[#a8b3cf50;]"
           >
             <div class="w-full h-[250px] rounded-lg">
-            <img class="h-[250px] w-auto mx-auto" src="${
-  data.images.coverart
-    ? data.images.coverart
-    : data.images.background
-}" />
+              <img class="h-[250px] w-auto mx-auto" src="${data.images?.coverart || data.images?.background}" />
             </div>
             <div class="flex flex-col gap-2 justify-between">
               <h2 class="font-semibold capitalize">${
   data.title.length < 30
     ? data.title
-    : `${data.title.slice(0, 27)}...`
+    : `${customTitle(data.title)}...`
 }</h2>
               <div class="flex flex-col gap-1 justify-between">
                 <div class="flex justify-between p-1 items-center">
@@ -47,7 +45,7 @@ const getShazamTracks = async () => {
                   <span class="text-sm">no likes</span>
                 </div>
                 <button
-                  class="flex justify-between bg-[#ffffff10] p-1 rounded items-center cursor-pointer hover:bg-[#ffffff20]"
+                  class="btn flex justify-between bg-[#ffffff10] p-1 rounded items-center cursor-pointer hover:bg-[#ffffff20]"
                 >
                   <img
                     class="h-[20px] color-white"
@@ -65,13 +63,15 @@ const getShazamTracks = async () => {
             </div>
           </div>
         `;
-      htmlToAppend += card;
-    });
-
-    cards.innerHTML = htmlToAppend;
+        htmlToAppend += card;
+      });
+      cards.innerHTML = htmlToAppend;
+      commentsPopUp();
+    } else {
+      throw new Error('Failed to get Shazam tracks');
+    }
   } catch (error) {
     throw new Error(error);
   }
 };
-
 export default getShazamTracks;
