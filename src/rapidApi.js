@@ -1,4 +1,5 @@
 import commentsPopUp from './Modules/commentsPopUp.js';
+import reservationPopUp from './Modules/reservationPopUp.js';
 
 const cards = document.getElementById('cards');
 
@@ -7,7 +8,7 @@ const getShazamTracks = async () => {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '093e23bdf9msh3bfd5f803bf6009p1e4395jsnb2a13a58d78b',
+      'X-RapidAPI-Key': '36333753fcmsh2c569f6a18ea132p116dc2jsn138253265de7',
       'x-rapidapi-host': 'shazam.p.rapidapi.com',
     },
   };
@@ -48,7 +49,7 @@ const getShazamTracks = async () => {
                   <span class="text-sm">no comment</span>
                 </button>
                 <button
-                  class="bg-[#ffffff10] p-1 rounded text-center cursor-pointer hover:bg-[#ffffff20]"
+                  class="btn-2 bg-[#ffffff10] p-1 rounded text-center cursor-pointer hover:bg-[#ffffff20]"
                 >
                   order now
                 </button>
@@ -60,6 +61,7 @@ const getShazamTracks = async () => {
       });
       cards.innerHTML = htmlToAppend;
       commentsPopUp();
+      reservationPopUp();
     } else {
       throw new Error('Failed to get Shazam tracks');
     }
