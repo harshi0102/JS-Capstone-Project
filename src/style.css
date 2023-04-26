@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 
-.pop {
+.pop,
+.reserv-pop {
   position: fixed;
   top: 0;
   width: 100%;
