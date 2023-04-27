@@ -1,31 +1,10 @@
-const getComments = async (itemId) => {
-  try {
-    const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/kOjkqwEwPrgtqCjTWn0f/comments?item_id=${itemId}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-const addComment = async (itemId, name, comment) => {
-  await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/kOjkqwEwPrgtqCjTWn0f/comments', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      item_id: itemId,
-      username: name,
-      comment,
-    }),
-  });
-};
-
 const commentsPopUp = () => {
   const likeBtns = Array.from(document.getElementsByClassName('btn'));
+  const comments = JSON.parse(localStorage.getItem('comments')) || {};
   const pop = document.querySelector('.pop');
   pop.setAttribute('style', 'display: none;');
 
-  const createPopup = async (data) => {
+  const createPopup = (data) => {
     const popup = document.createElement('div');
     popup.classList.add('popup');
 
@@ -48,15 +27,14 @@ const commentsPopUp = () => {
     popupTitle.innerHTML = data.title;
 
     const commentsTitle = document.createElement('h3');
-    const comments = await getComments(data.key);
-    commentsTitle.textContent = `Comments (${comments.length})`;
+    commentsTitle.textContent = `Comments (${comments[data.title] ? comments[data.title].length : 0})`;
 
     const commentList = document.createElement('ul');
     commentList.classList.add('comment-list');
-    if (comments.length > 0) {
-      comments.forEach((comment) => {
+    if (comments[data.title]) {
+      comments[data.title].forEach((comment) => {
         const commentItem = document.createElement('li');
-        commentItem.innerHTML = `${comment.creation_date} <strong>${comment.comment} : </strong>  ${comment.username}`;
+        commentItem.innerHTML = `<strong>${comment.comment} : </strong>  ${comment.name}`;
         commentList.appendChild(commentItem);
       });
     } else {
@@ -83,21 +61,24 @@ const commentsPopUp = () => {
     submitBtn.innerHTML = 'Comment';
 
     const form = document.createElement('form');
-    form.addEventListener('submit', async (event) => {
+    form.addEventListener('submit', (event) => {
       event.preventDefault();
       const commentInput = event.target.querySelector('.comment-input');
       const comment = commentInput.value.trim();
       const nameInput = event.target.querySelector('.name-input');
       const name = nameInput.value.trim();
       if (comment) {
-        addComment(data.key, name, comment);
-        const comments = await getComments(data.key);
+        if (!comments[data.title]) {
+          comments[data.title] = [];
+        }
+        comments[data.title].push({ name, comment });
+        localStorage.setItem('comments', JSON.stringify(comments));
 
         const commentItem = document.createElement('li');
-        commentItem.innerHTML = `<strong>${comment}:</strong> ${name}`;
+        commentItem.innerHTML = `<strong>${name}:</strong> ${comment}`;
         commentList.appendChild(commentItem);
 
-        commentsTitle.textContent = `Comments (${comments.length})`;
+        commentsTitle.textContent = `Comments (${comments[data.title].length})`;
         commentInput.value = '';
         nameInput.value = '';
       }
@@ -129,6 +110,7 @@ const commentsPopUp = () => {
   likeBtns.forEach((likeBtn) => {
     likeBtn.addEventListener('click', async () => {
       pop.setAttribute('style', 'display: block;');
+      // const title = likeBtn.parentNode.parentNode.querySelector('h2').textContent;
       const cardKey = likeBtn.parentNode.parentNode.parentNode.id;
       const data = JSON.parse(localStorage.getItem('songs')).find((song) => song.key === cardKey);
       createPopup(data);
