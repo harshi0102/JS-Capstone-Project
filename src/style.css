@@ -26,6 +26,10 @@
   margin-right: auto;
 }
 
+.popup::-webkit-scrollbar {
+  display: none;
+}
+
 .img-container {
   overflow: hidden;
   max-height: 45vh;
