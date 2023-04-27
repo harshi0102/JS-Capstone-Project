@@ -44,12 +44,13 @@ const commentsPopUp = () => {
     popupImg.src = data.images?.coverart || data.images?.background;
 
     const popupTitle = document.createElement('h3');
-    popupTitle.classList.add('text-3xl', 'font-bold');
+    popupTitle.classList.add('text-3xl', 'font-bold', 'p-4');
     popupTitle.innerHTML = data.title;
 
     const commentsTitle = document.createElement('h3');
     const comments = await getComments(data.key);
-    commentsTitle.textContent = `Comments (${comments.length})`;
+    commentsTitle.classList.add('text-[#1ED760]')
+    commentsTitle.textContent = `Comments (${comments.length ? comments.length : '0' })`;
 
     const commentList = document.createElement('ul');
     commentList.classList.add('comment-list');
