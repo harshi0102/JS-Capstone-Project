@@ -1,4 +1,4 @@
-const getComments = async (itemId) => {
+const getReservation = async (itemId) => {
   try {
     const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/zRod3rPxBRjxEDaYzujw/reservations?item_id=${itemId}`);
     const data = await response.json();
@@ -9,18 +9,25 @@ const getComments = async (itemId) => {
 };
 
 
-const addComment = async (itemId, name, date_start, date_end) => {
-  await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/zRod3rPxBRjxEDaYzujw/reservations', {
+const addReservation = async (itemId, name, date_start, date_end) => {
+  const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/zRod3rPxBRjxEDaYzujw/reservations', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       item_id: itemId,
       username: name,
       date_start: date_start,
-      date_end: date_end,
+      date_end: date_end
     }),
   });
+
+  if (!response.ok) {
+    const errorMessage = await response.text();
+    console.error(`Error ${response.status}: ${errorMessage}`);
+  }
 };
+
+
 
 const reservationPopUp = () => {
   const reservBtn = Array.from(document.getElementsByClassName('btn-2'));
@@ -28,7 +35,7 @@ const reservationPopUp = () => {
   const pop = document.querySelector('.reserv-pop');
   pop.setAttribute('style', 'display: none;');
 
-  const createPopup = (data) => {
+  const createPopup = async (data) => {
     const popup = document.createElement('div');
     popup.classList.add('popup');
 
@@ -51,15 +58,15 @@ const reservationPopUp = () => {
     popupTitle.innerHTML = data.title;
 
     const commentsTitle = document.createElement('h3');
-    const comments = getComments(data.key);
-    commentsTitle.textContent = `Reservation (${comments[data.title] ? comments[data.title].length : 0})`;
+    const reservations = await getReservation(data.key);
+    commentsTitle.textContent = `Reservations : (${reservations.length === 0 ? '0' : reservations.length})`;
 
     const commentList = document.createElement('ul');
     commentList.classList.add('comment-list');
-    if (comments[data.title]) {
-      comments[data.title].forEach((comment) => {
+    if (reservations.length > 0) {
+      reservations.forEach((reservation) => {
         const commentItem = document.createElement('li');
-        commentItem.innerHTML = `<strong>${comment.comment} : </strong>  ${comment.name}`;
+        commentItem.innerHTML = `${reservation.date_start} - ${reservation.date_end} || by <strong> ${reservation.username}</strong>`;
         commentList.appendChild(commentItem);
       });
     } else {
@@ -92,27 +99,31 @@ const reservationPopUp = () => {
     submitBtn.innerHTML = 'Reserve';
 
     const form = document.createElement('form');
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      const commentInput = event.target.querySelector('.comment-input');
-      const startDate = commentInput.value.trim();
-      const nameInput = event.target.querySelector('.name-input');
-      const name = nameInput.value.trim();
-      const endInput = document.querySelector('.end-Input');
-      const endDate = endInput.value.trim();
-      console.log('type ---->', typeof(startDate), typeof(name), typeof(endDate))
+      const nameInput = event.target.querySelector('.comment-input').value.trim();
+
+      const startDate = event.target.querySelector('.name-input').value.trim();
+      const startDateFormat = new Date(startDate)
+
+      const endDate = document.querySelector('.end-Input').value.trim();
+      const endDateFormat = new Date(endDate);
+
       if (startDate) {
-        addComment(data.key, name, startDate, endDate);
-        const comments =  getComments(data.key);
+        addReservation(data.key, nameInput, startDateFormat, endDateFormat);
+        
+        const reservations = await getReservation(data.key)
 
         const commentItem = document.createElement('li');
-        commentItem.innerHTML = `<strong>${startDate}:</strong> ${name}`;
+        commentItem.innerHTML = `${startDate} - ${endDate} by </strong> ${nameInput} <strong>`;
         commentList.appendChild(commentItem);
 
-        commentsTitle.textContent = `Reservations (${comments.length})`;
-        commentInput.value = '';
-        nameInput.value = '';
-        endInput.value = '';
+
+        commentsTitle.textContent = `Reservations (${reservations.length === 0 ? '0' : reservations.length})`;
+
+        // nameInput.value = '';
+        // startDate.value = '';
+        // endDate.value = '';
       }
     });
 
