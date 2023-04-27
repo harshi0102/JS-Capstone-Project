@@ -69,7 +69,6 @@
 .name-input {
   color: black;
   width: 50%;
-  height: 30vh;
 }
 
 .comment-list {
@@ -86,4 +85,9 @@ form {
 form > button {
   width: 30%;
   border: 1px solid white;
+}
+
+.end-Input {
+  color: black;
+  width: 50%;
 }

@@ -1,10 +1,37 @@
+const getReservation = async (itemId) => {
+  try {
+    const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/zRod3rPxBRjxEDaYzujw/reservations?item_id=${itemId}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const addReservation = async (itemId, name, dateStart, dateEnd) => {
+  const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/zRod3rPxBRjxEDaYzujw/reservations', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      item_id: itemId,
+      username: name,
+      dateStart,
+      dateEnd,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorMessage = await response.text();
+    throw new Error(errorMessage);
+  }
+};
+
 const reservationPopUp = () => {
   const reservBtn = Array.from(document.getElementsByClassName('btn-2'));
-  const comments = JSON.parse(localStorage.getItem('comments')) || {};
   const pop = document.querySelector('.reserv-pop');
   pop.setAttribute('style', 'display: none;');
 
-  const createPopup = (data) => {
+  const createPopup = async (data) => {
     const popup = document.createElement('div');
     popup.classList.add('popup');
 
@@ -27,65 +54,76 @@ const reservationPopUp = () => {
     popupTitle.innerHTML = data.title;
 
     const commentsTitle = document.createElement('h3');
-    commentsTitle.textContent = `Comments (${comments[data.title] ? comments[data.title].length : 0})`;
+    const reservations = await getReservation(data.key);
+    commentsTitle.textContent = `Reservations : (${reservations.length === 0 ? '0' : reservations.length})`;
 
     const commentList = document.createElement('ul');
     commentList.classList.add('comment-list');
-    if (comments[data.title]) {
-      comments[data.title].forEach((comment) => {
+    if (reservations.length > 0) {
+      reservations.forEach((reservation) => {
         const commentItem = document.createElement('li');
-        commentItem.innerHTML = `<strong>${comment.comment} : </strong>  ${comment.name}`;
+        commentItem.innerHTML = `${reservation.date_start} - ${reservation.date_end} || by <strong> ${reservation.username}</strong>`;
         commentList.appendChild(commentItem);
       });
     } else {
       const noCommentItem = document.createElement('li');
-      noCommentItem.innerHTML = 'No comments yet';
+      noCommentItem.innerHTML = 'No reservations yet';
       commentList.appendChild(noCommentItem);
     }
 
     const formTitle = document.createElement('h3');
-    formTitle.innerHTML = 'Add a comment';
+    formTitle.innerHTML = 'Add a reservation';
 
     const commentInput = document.createElement('input');
     commentInput.type = 'text';
     commentInput.classList.add('comment-input');
-    commentInput.placeholder = 'Enter your name...';
+    commentInput.placeholder = 'Your name';
 
     const nameInput = document.createElement('input');
-    nameInput.type = 'text';
+    nameInput.type = 'date';
     nameInput.classList.add('name-input');
-    nameInput.placeholder = 'Enter a comment...';
+    nameInput.placeholder = 'Start Date';
+
+    const endInput = document.createElement('input');
+    endInput.type = 'date';
+    endInput.classList.add('end-Input');
+    endInput.placeholder = 'End Date';
 
     const submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
-    submitBtn.innerHTML = 'Comment';
+    submitBtn.innerHTML = 'Reserve';
 
     const form = document.createElement('form');
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      const commentInput = event.target.querySelector('.comment-input');
-      const comment = commentInput.value.trim();
-      const nameInput = event.target.querySelector('.name-input');
-      const name = nameInput.value.trim();
-      if (comment) {
-        if (!comments[data.title]) {
-          comments[data.title] = [];
-        }
-        comments[data.title].push({ name, comment });
-        localStorage.setItem('comments', JSON.stringify(comments));
+      const nameInput = event.target.querySelector('.comment-input').value.trim();
+
+      const startDate = event.target.querySelector('.name-input').value.trim();
+      const startDateFormat = new Date(startDate);
+
+      const endDate = document.querySelector('.end-Input').value.trim();
+      const endDateFormat = new Date(endDate);
+
+      if (startDate) {
+        addReservation(data.key, nameInput, startDateFormat, endDateFormat);
+
+        const reservations = await getReservation(data.key);
 
         const commentItem = document.createElement('li');
-        commentItem.innerHTML = `<strong>${name}:</strong> ${comment}`;
+        commentItem.innerHTML = `${startDate} - ${endDate} by </strong> ${nameInput} <strong>`;
         commentList.appendChild(commentItem);
 
-        commentsTitle.textContent = `Comments (${comments[data.title].length})`;
-        commentInput.value = '';
-        nameInput.value = '';
+        commentsTitle.textContent = `Reservations (${reservations.length === 0 ? '0' : reservations.length})`;
+
+        // nameInput.value = '';
+        // startDate.value = '';
+        // endDate.value = '';
       }
     });
 
     form.appendChild(commentInput);
     form.appendChild(nameInput);
+    form.appendChild(endInput);
     form.appendChild(submitBtn);
 
     const popupHeader = document.createElement('div');
@@ -107,11 +145,11 @@ const reservationPopUp = () => {
     pop.appendChild(popup);
   };
 
-  reservBtn.forEach((likeBtn) => {
-    likeBtn.addEventListener('click', async () => {
+  reservBtn.forEach((reserveBtn) => {
+    reserveBtn.addEventListener('click', async () => {
       pop.setAttribute('style', 'display: block;');
-      const title = likeBtn.parentNode.parentNode.querySelector('h2').textContent;
-      const data = JSON.parse(localStorage.getItem('songs')).find((song) => song.title === title);
+      const cardKey = reserveBtn.parentNode.parentNode.parentNode.id;
+      const data = JSON.parse(localStorage.getItem('songs')).find((song) => song.key === cardKey);
       createPopup(data);
     });
   });
