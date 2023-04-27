@@ -30,7 +30,7 @@ const commentsPopUp = () => {
     popup.classList.add('popup');
 
     const closeBtn = document.createElement('div');
-    closeBtn.classList.add('close-btn', 'text-4xl', 'py-2', 'cursor-pointer', 'text-right');
+    closeBtn.classList.add('close-btn', 'text-4xl', 'pb-2', 'cursor-pointer', 'text-right');
     closeBtn.innerHTML = '&times;';
     closeBtn.addEventListener('click', () => {
       popup.remove();
@@ -38,18 +38,23 @@ const commentsPopUp = () => {
     });
 
     const popupImgContainer = document.createElement('div');
-    popupImgContainer.classList.add('img-container');
+    popupImgContainer.classList.add('img-container', 'rounded-lg');
 
     const popupImg = document.createElement('img');
+    // popupImg.classList.add('')
     popupImg.src = data.images?.coverart || data.images?.background;
 
     const popupTitle = document.createElement('h3');
-    popupTitle.classList.add('text-3xl', 'font-bold', 'p-4');
+    popupTitle.classList.add('text-3xl', 'font-bold', 'pt-4');
     popupTitle.innerHTML = data.title;
+
+    const artist = document.createElement('h4')
+    artist.classList.add('text-[#777]', '-mt-2')
+    artist.innerHTML = data.artists[0].alias
 
     const commentsTitle = document.createElement('h3');
     const comments = await getComments(data.key);
-    commentsTitle.classList.add('text-[#1ED760]')
+    commentsTitle.classList.add('text-[#1ED760]', 'mt-4')
     commentsTitle.textContent = `Comments (${comments.length ? comments.length : '0' })`;
 
     const commentList = document.createElement('ul');
@@ -117,6 +122,7 @@ const commentsPopUp = () => {
     popupImgContainer.appendChild(popupImg);
     popupContent.appendChild(popupImgContainer);
     popupContent.appendChild(popupTitle);
+    popupContent.appendChild(artist);
     popupContent.appendChild(commentsTitle);
     popupContent.appendChild(commentList);
     popupContent.appendChild(formTitle);

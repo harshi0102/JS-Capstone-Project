@@ -10,17 +10,17 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(7px);
   padding: 3%;
 }
 
 .popup {
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 1.25em;
+  padding: 0 1.25em 1.25em 1.25em;
   width: 70%;
   max-height: 95%;
   overflow-y: auto;
-  border-radius: 5px;
+  border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   margin-left: auto;
   margin-right: auto;
@@ -49,7 +49,7 @@
   border-width: 2px;
   border-color: white;
   text-align: center;
-  gap: 3px;
+  gap: 10px;
 }
 
 .h3class {
@@ -69,6 +69,13 @@
 .name-input {
   color: black;
   width: 50%;
+  height: 15vh;
+}
+
+.start-date-input, .end-Input {
+  color: black;
+  width: 50%;
+  height: 5vh;
 }
 
 .comment-list {
@@ -85,11 +92,8 @@ form {
 form > button {
   width: 30%;
   border: 1px solid white;
-}
-
-.end-Input {
-  color: black;
-  width: 50%;
+  height: 5vh;
+  margin-bottom: 1rem;
 }
 
 @keyframes gradient {
