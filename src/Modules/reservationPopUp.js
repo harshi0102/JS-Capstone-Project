@@ -8,30 +8,26 @@ const getReservation = async (itemId) => {
   }
 };
 
-
-const addReservation = async (itemId, name, date_start, date_end) => {
+const addReservation = async (itemId, name, dateStart, dateEnd) => {
   const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/zRod3rPxBRjxEDaYzujw/reservations', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       item_id: itemId,
       username: name,
-      date_start: date_start,
-      date_end: date_end
+      dateStart,
+      dateEnd,
     }),
   });
 
   if (!response.ok) {
     const errorMessage = await response.text();
-    console.error(`Error ${response.status}: ${errorMessage}`);
+    throw new Error(errorMessage);
   }
 };
 
-
-
 const reservationPopUp = () => {
   const reservBtn = Array.from(document.getElementsByClassName('btn-2'));
-  const comments = JSON.parse(localStorage.getItem('comments')) || {};
   const pop = document.querySelector('.reserv-pop');
   pop.setAttribute('style', 'display: none;');
 
@@ -88,11 +84,10 @@ const reservationPopUp = () => {
     nameInput.classList.add('name-input');
     nameInput.placeholder = 'Start Date';
 
-    const endInput=document.createElement('input');
-    endInput.type='date';
+    const endInput = document.createElement('input');
+    endInput.type = 'date';
     endInput.classList.add('end-Input');
-    endInput.placeholder="End Date";
-
+    endInput.placeholder = 'End Date';
 
     const submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
@@ -104,20 +99,19 @@ const reservationPopUp = () => {
       const nameInput = event.target.querySelector('.comment-input').value.trim();
 
       const startDate = event.target.querySelector('.name-input').value.trim();
-      const startDateFormat = new Date(startDate)
+      const startDateFormat = new Date(startDate);
 
       const endDate = document.querySelector('.end-Input').value.trim();
       const endDateFormat = new Date(endDate);
 
       if (startDate) {
         addReservation(data.key, nameInput, startDateFormat, endDateFormat);
-        
-        const reservations = await getReservation(data.key)
+
+        const reservations = await getReservation(data.key);
 
         const commentItem = document.createElement('li');
         commentItem.innerHTML = `${startDate} - ${endDate} by </strong> ${nameInput} <strong>`;
         commentList.appendChild(commentItem);
-
 
         commentsTitle.textContent = `Reservations (${reservations.length === 0 ? '0' : reservations.length})`;
 
