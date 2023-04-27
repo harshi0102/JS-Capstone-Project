@@ -15,7 +15,7 @@
 - [📗 Table of Contents](#-table-of-contents)
 - [📖 Music Tracks Website ](#-music-tracks-website-)
     - [How to build the "Music Track" website](#how-to-build-the-music-track-website)
-- [Responsive website for communities events and participants details ](#responsive-website-for-communities-events-and-participants-details-)
+- [Responsive website  ](#responsive-website--)
   - [🛠 Walk through ](#-walk-through-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
@@ -68,7 +68,7 @@ Will start by building the core functionalities. At the very beginning the web w
 - 5. Implementation of External API
 
 
-# Responsive website for communities events and participants details <a name="about-project"></a>
+# Responsive website  <a name="about-project"></a>
 This project is about creating a responsive website to showcase community event, activities and agenda. This is a implementation of SINGLE PAGE APPLICATION widely known as SPA.
 
 <!-- > Describe your project in 1 or 2 sentences. -->
