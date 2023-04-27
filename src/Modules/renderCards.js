@@ -1,4 +1,5 @@
 import { addLike, fetchLikes } from './addLike.js';
+import { itemsCounter } from './itemCounter.js';
 
 const cards = document.getElementById('cards');
 
@@ -58,6 +59,7 @@ const renderCards = (array) => {
       likeBtn.setAttribute('src', './assets/adoreRed.svg');
     });
   });
+  itemsCounter()
 };
 
 export default renderCards;
