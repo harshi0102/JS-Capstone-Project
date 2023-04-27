@@ -110,8 +110,9 @@ const commentsPopUp = () => {
   likeBtns.forEach((likeBtn) => {
     likeBtn.addEventListener('click', async () => {
       pop.setAttribute('style', 'display: block;');
-      const title = likeBtn.parentNode.parentNode.querySelector('h2').textContent;
-      const data = JSON.parse(localStorage.getItem('songs')).find((song) => song.title === title);
+      // const title = likeBtn.parentNode.parentNode.querySelector('h2').textContent;
+      const cardKey = likeBtn.parentNode.parentNode.parentNode.id;
+      const data = JSON.parse(localStorage.getItem('songs')).find((song) => song.key === cardKey);
       createPopup(data);
     });
   });

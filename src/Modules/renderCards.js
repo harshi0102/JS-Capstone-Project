@@ -16,7 +16,7 @@ const renderCards = (array) => {
             </div>
             <div class="flex flex-col gap-2 justify-between">
               <h2 class="font-semibold capitalize custom-title">${
-  data.title
+  data.title.length < 28 ? data.title : `${data.title.substring(0, 25)}...`
 }</h2>
               <div class="flex flex-col gap-1 justify-between">
                 <div class="flex justify-between p-1 items-center">
