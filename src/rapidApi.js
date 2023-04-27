@@ -1,11 +1,9 @@
 import commentsPopUp from './Modules/commentsPopUp.js';
 import reservationPopUp from './Modules/reservationPopUp.js';
-import { renderCards } from './Modules/renderCards.js';
+import renderCards from './Modules/renderCards.js';
 import { url, options } from './Modules/apiConsts.js';
 
-
 const getShazamTracks = async () => {
-
   if (localStorage.getItem('songs')) {
     const localStorageItem = localStorage.getItem('songs');
     const songs = JSON.parse(localStorageItem);

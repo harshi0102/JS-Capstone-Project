@@ -1,7 +1,8 @@
 import { addLike, fetchLikes } from './addLike.js';
+
 const cards = document.getElementById('cards');
 
-export  const renderCards = (array) => {
+const renderCards = (array) => {
   let htmlToAppend = '';
   array.forEach((data) => {
     const card = `
@@ -58,3 +59,5 @@ export  const renderCards = (array) => {
     });
   });
 };
+
+export default renderCards;
