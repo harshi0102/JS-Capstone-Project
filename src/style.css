@@ -72,8 +72,7 @@
   height: 15vh;
 }
 
-.start-date-input,
-.end-Input {
+.start-date-input, .end-Input {
   color: black;
   width: 50%;
   height: 5vh;
@@ -98,23 +97,21 @@ form > button {
 }
 
 @keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .card-color:hover {
   background: linear-gradient(-45deg, #35f80410, #001aff10, #fc049515, #cd04ff15);
-  background-size: 200% 200%;
-  animation: gradient 8s ease infinite;
+	background-size: 200% 200%;
+	animation: gradient 8s ease infinite;
 }
 
 .custom-h {

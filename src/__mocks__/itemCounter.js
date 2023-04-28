@@ -1,10 +1,12 @@
-// const itemsContainer = document.getElementById('cards');
+const itemsContainer = document.getElementById('cards');
 
-// export const itemsCounter = (item) => {
-//   const childCount = item.childElementCount;
-//   const charts = document.createElement('li');
+export const itemsCounter = (item) => {
+  
+  const childCount = item.childElementCount;
+  const charts = document.createElement('li');
+  
+  charts.innerHTML = `Top Charts (${childCount})`;
+  
+};
 
-//   charts.innerHTML = `Top Charts (${childCount})`;
-// };
-
-// exports.itemsCounter = itemsCounter;
+exports.itemsCounter = itemsCounter;

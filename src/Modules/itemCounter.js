@@ -1,7 +1,8 @@
-// export const itemsCounter = () => {
-//   const itemsContainer = document.getElementById('cards');
-//   const childCount = itemsContainer.childElementCount;
+export const itemsCounter = () => {
+  const itemsContainer = document.getElementById('cards');
+  const childCount = itemsContainer.childElementCount;
 
-//   const charts = document.getElementById('charts');
-//   charts.innerHTML = `Top Charts (${childCount})`;
-// };
+  const charts = document.getElementById('charts');
+  charts.innerHTML = `Top Charts (${childCount})`;
+  
+};
