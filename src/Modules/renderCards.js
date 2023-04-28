@@ -16,9 +16,10 @@ const renderCards = (array) => {
 }" />
             </div>
             <div class="flex flex-col gap-2 justify-between">
-              <h2 class="font-semibold capitalize custom-title">${
+              <h2 class="font-semibold text-lg capitalize custom-title">${
   data.title.length < 28 ? data.title : `${data.title.substring(0, 25)}...`
 }</h2>
+              <h5 class="text-[#777] -mt-2">${data.artists[0].alias}</h5>
               <div class="flex flex-col gap-1 justify-between">
                 <div class="flex justify-between p-1 items-center">
                   <span id="like-${data.key}" class="text-sm">no likes</span>
