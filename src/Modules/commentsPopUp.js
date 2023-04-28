@@ -48,14 +48,14 @@ const commentsPopUp = () => {
     popupTitle.classList.add('text-3xl', 'font-bold', 'pt-4');
     popupTitle.innerHTML = data.title;
 
-    const artist = document.createElement('h4')
-    artist.classList.add('text-[#777]', '-mt-2')
-    artist.innerHTML = data.artists[0].alias
+    const artist = document.createElement('h4');
+    artist.classList.add('text-[#777]', '-mt-2');
+    artist.innerHTML = data.artists[0].alias;
 
     const commentsTitle = document.createElement('h3');
     const comments = await getComments(data.key);
-    commentsTitle.classList.add('text-[#1ED760]', 'mt-4')
-    commentsTitle.textContent = `Comments (${comments.length ? comments.length : '0' })`;
+    commentsTitle.classList.add('text-[#1ED760]', 'mt-4');
+    commentsTitle.textContent = `Comments (${comments.length ? comments.length : '0'})`;
 
     const commentList = document.createElement('ul');
     commentList.classList.add('comment-list');

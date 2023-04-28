@@ -60,7 +60,7 @@ const renderCards = (array) => {
       likeBtn.setAttribute('src', './assets/adoreRed.svg');
     });
   });
-  itemsCounter()
+  itemsCounter();
 };
 
 export default renderCards;
