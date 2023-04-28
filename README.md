@@ -169,7 +169,7 @@ Music Track Website: mobile-first approach & responsive on desktop version and b
 
 
 ## 🚀 Live Demo <a name="live-demo"></a>
-[Live Demo Link](coming soon )
+[Live Demo Link](https://harshi0102.github.io/JS-Capstone-Project/dist/)
 
 ## 🚀 Live Recording <a name="live-demo"></a>
 [The recording](coming soon)
