@@ -54,6 +54,7 @@ const commentsPopUp = () => {
 
     const commentsTitle = document.createElement('h3');
     const comments = await getComments(data.key);
+
     commentsTitle.classList.add('text-[#1ED760]', 'mt-4');
     commentsTitle.textContent = `Comments (${comments.length ? comments.length : '0'})`;
 
