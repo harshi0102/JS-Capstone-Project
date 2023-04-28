@@ -1,5 +1,3 @@
-import reservationCounter from "./reservationCounter";
-
 const getReservation = async (itemId) => {
   try {
     const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/zRod3rPxBRjxEDaYzujw/reservations?item_id=${itemId}`);
@@ -56,8 +54,8 @@ const reservationPopUp = () => {
     popupTitle.innerHTML = data.title;
 
     const commentsTitle = document.createElement('h3');
-    commentsTitle.id= 'reservation-counter'
-   
+    commentsTitle.id = 'reservation-counter';
+
     const reservations = getReservation(data.key).then((res) => {
       if (res.error) {
         commentsTitle.textContent = 'Reservations (0)';
@@ -79,7 +77,7 @@ const reservationPopUp = () => {
     commentsTitle.textContent = `Reservations (${reservations === undefined ? '0' : reservations?.length})`;
 
     const commentList = document.createElement('ul');
-    commentList.id ='comment-list';
+    commentList.id = 'comment-list';
     commentList.classList.add('comment-list');
 
     if (reservations.length > 0) {
