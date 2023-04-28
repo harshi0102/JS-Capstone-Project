@@ -3,6 +3,8 @@
 <div align="center">
 
   <br/>
+  <img src="./src/assets/Spotify_logo_with_text.svg" width="200px" />
+  <br/>
   <h3><b>Music Tracks</b></h3>
 </div>
 
