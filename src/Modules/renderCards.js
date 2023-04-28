@@ -1,5 +1,5 @@
 import { addLike, fetchLikes } from './addLike.js';
-import { itemsCounter } from './itemCounter.js';
+import itemsCounter from './itemCounter.js';
 
 const cards = document.getElementById('cards');
 
@@ -12,7 +12,7 @@ const renderCards = (array) => {
 }" class="flex flex-col gap-2 p-4 h-full rounded-2xl bg-[#1C1F26] drop-shadow-md border-2 border-[#a8b3cf33;] hover:border-[#1ED760;] card-color">
             <div class="w-full h-[250px] rounded-lg">
               <img class="h-[250px] w-auto rounded-lg mx-auto" src="${
-  data.images?.coverart || data.images?.background
+  data.images?.coverart || data.images?.background || `https://dummyimage.com/400x400/000/1aff00&text=${data.title}`
 }" />
             </div>
             <div class="flex flex-col gap-2 justify-between">
@@ -60,7 +60,7 @@ const renderCards = (array) => {
       likeBtn.setAttribute('src', './assets/adoreRed.svg');
     });
   });
-  itemsCounter()
+  itemsCounter();
 };
 
 export default renderCards;

@@ -54,30 +54,28 @@ const reservationPopUp = () => {
     popupTitle.innerHTML = data.title;
 
     const commentsTitle = document.createElement('h3');
-    const reservations = getReservation(data.key).then(res => {
+    const reservations = getReservation(data.key).then((res) => {
       if (res.error) {
-        commentsTitle.textContent = `Reservations (0)`;
-      }else {
+        commentsTitle.textContent = 'Reservations (0)';
+      } else {
         commentsTitle.textContent = `Reservations (${res.length})`;
-        // console.log('---++++', res) 
-        let htmlToAppend = ''
+        // console.log('---++++', res)
+        let htmlToAppend = '';
         res.forEach((item) => {
-          const html = `<li>${item.date_start} - ${item.date_end} || by <strong> ${item.username}</strong></li>`
-          htmlToAppend += html
-        })
-        const reserveList = document.querySelector('.comment-list')
-        reserveList.innerHTML = htmlToAppend
+          const html = `<li>${item.date_start} - ${item.date_end} || by <strong> ${item.username}</strong></li>`;
+          htmlToAppend += html;
+        });
+        const reserveList = document.querySelector('.comment-list');
+        reserveList.innerHTML = htmlToAppend;
       }
-    }).catch(err => {
-      commentsTitle.textContent = `Reservations (0)`;
-    })
-    commentsTitle.textContent = `Reservations (${reservations === undefined? '0' : reservations?.length})`;
+    }).catch((err) => {
+      commentsTitle.textContent = 'Reservations (0)';
+      throw new Error(err);
+    });
+    commentsTitle.textContent = `Reservations (${reservations === undefined ? '0' : reservations?.length})`;
 
     const commentList = document.createElement('ul');
     commentList.classList.add('comment-list');
-
-    setTimeout(console.log('reservastion --- > ' , reservations ), 2000)
-    
 
     if (reservations.length > 0) {
       reservations.forEach((reservation) => {
@@ -119,30 +117,25 @@ const reservationPopUp = () => {
       const nameInput = event.target.querySelector('.comment-input').value.trim();
 
       const startDate = event.target.querySelector('.name-input').value.trim();
-      console.log('------>' ,startDate, typeof(startDate))
       // const startDateFormat = new Date(startDate);
-      
+
       const endDate = document.querySelector('.end-Input').value.trim();
-      console.log('------>' ,endDate, typeof(endDate))
       // const endDateFormat = new Date(endDate);
 
       if (startDate) {
         addReservation(data.key, nameInput, startDate, endDate);
 
-        setTimeout( () => {
+        setTimeout(() => {
           const reservations = getReservation(data.key);
 
           const commentItem = document.createElement('li');
           commentItem.innerHTML = `${startDate} - ${endDate} by </strong> ${nameInput} <strong>`;
           commentList.appendChild(commentItem);
 
-        commentsTitle.textContent = `Reservations (${reservations?.length === 0 ? '0' : reservations.length})`;
-        } ,1000)
-        
+          commentsTitle.textContent = `Reservations (${reservations?.length === 0 ? '0' : reservations.length})`;
+        }, 1000);
 
         form.reset();
-        
-
       }
     });
 
