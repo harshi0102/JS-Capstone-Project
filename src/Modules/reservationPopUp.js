@@ -47,7 +47,7 @@ const reservationPopUp = () => {
     popupImgContainer.classList.add('img-container');
 
     const popupImg = document.createElement('img');
-    popupImg.src = data.images?.coverart || data.images?.background;
+    popupImg.src = data.images?.coverart || data.images?.background || `https://dummyimage.com/400x400/000/1aff00&text=${data.title}`;
 
     const popupTitle = document.createElement('h3');
     popupTitle.classList.add('text-3xl', 'font-bold');
