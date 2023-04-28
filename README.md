@@ -19,7 +19,7 @@
   - [🛠 Walk through ](#-walk-through-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
-    - [Tools i have used for this project ](#tools-i-have-used-for-this-project-)
+    - [Tools ](#tools-)
     - [Key Features ](#key-features-)
   - [🚀 Live Demo ](#-live-demo-)
   - [🚀 Live Recording ](#-live-recording-)
@@ -126,7 +126,7 @@ Music Track Website: mobile-first approach & responsive on desktop version and b
 </details>
 
 <!-- Features -->
-### Tools i have used for this project <a name="tools"></a>
+### Tools <a name="tools"></a>
   <details>
     <summary>Code Convention, Code Analysis</summary>
       <ul>
