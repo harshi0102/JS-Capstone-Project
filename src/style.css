@@ -113,3 +113,7 @@ form > button {
 	background-size: 200% 200%;
 	animation: gradient 8s ease infinite;
 }
+
+.custom-h {
+  height: 5vh;
+}
