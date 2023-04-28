@@ -176,7 +176,7 @@ Music Track Website: mobile-first approach & responsive on desktop version and b
 
 ## 🚀 Live Recording <a name="live-demo"></a>
 
-[The recording](coming soon)
+[The recording](https://drive.google.com/file/d/1AAU3Hjf35n3r7E0hE_cEftdkBdNJQ-e1/view?usp=sharing )
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
