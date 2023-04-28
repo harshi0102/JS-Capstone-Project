@@ -1,1 +1,8 @@
 node_modules
+__mocks__
+.github
+src
+.eslintrc.json
+.hintrc
+.stylelintrc.json
+webpack.config
