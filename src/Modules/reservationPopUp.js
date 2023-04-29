@@ -97,6 +97,7 @@ const reservationPopUp = () => {
     } else {
       const noCommentItem = document.createElement('li');
       noCommentItem.innerHTML = 'No reservations yet';
+      noCommentItem.id = 'no-reserv-yet'
       commentList.appendChild(noCommentItem);
     }
 
@@ -144,6 +145,11 @@ const reservationPopUp = () => {
           commentList.appendChild(commentItem);
 
           commentsTitle.textContent = `Reservations (${reservations?.length === 0 ? '0' : reservations.length})`;
+
+          if(reservations.length === 0) {
+            const theNoReservToRemove = document.getElementById('no-reserv-yet')
+            theNoReservToRemove.remove()
+          }
 
           domReservations();
         }, 1000);
