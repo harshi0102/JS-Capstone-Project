@@ -26,6 +26,14 @@ const addReservation = async (itemId, name, dateStart, dateEnd) => {
   }
 };
 
+const domReservations = () => {
+  const itemsContainer = document.getElementById('comment-list');
+  const childCount = itemsContainer.childElementCount;
+
+  const reservationCounter = document.getElementById('reservation-counter');
+  reservationCounter.innerHTML = `Reservations (${childCount})`;
+};
+
 const reservationPopUp = () => {
   const reservBtn = Array.from(document.getElementsByClassName('btn-2'));
   const pop = document.querySelector('.reserv-pop');
@@ -136,6 +144,8 @@ const reservationPopUp = () => {
           commentList.appendChild(commentItem);
 
           commentsTitle.textContent = `Reservations (${reservations?.length === 0 ? '0' : reservations.length})`;
+
+          domReservations();
         }, 1000);
 
         form.reset();
