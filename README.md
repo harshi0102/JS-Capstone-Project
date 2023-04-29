@@ -8,8 +8,6 @@
 
 <h1>Javascript group capstone project</h1>
 
-<!-- TABLE OF CONTENTS -->
-
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
@@ -37,7 +35,6 @@
   - [🙏 Acknowledgments ](#-acknowledgments-)
   - [📝 License ](#-license-)
 
-<!-- PROJECT DESCRIPTION -->
 
 # 📖 Music Tracks Website <a name="about-project"></a>
 
@@ -59,7 +56,6 @@ Will start by building the core functionalities. At the very beginning the web w
 </p>
 
 
-<!-- > Describe your project in 1 or 2 sentences. -->
 ### How to build the "Music Track" website
 - 1. Use callbacks and promises.
 - 2. Learn how to use proper ES6 syntax.
@@ -71,7 +67,6 @@ Will start by building the core functionalities. At the very beginning the web w
 # Responsive website  <a name="about-project"></a>
 This project is about creating a responsive website to showcase community event, activities and agenda. This is a implementation of SINGLE PAGE APPLICATION widely known as SPA.
 
-<!-- > Describe your project in 1 or 2 sentences. -->
 Music Track Website: mobile-first approach & responsive on desktop version and bigger size is a capstone project in the process of experiences mimic real-world projects where we must apply what we learned throughout the entire Module, and are built with business specifications that will look really nice in our portfolio. This is a Single Page Application project where in a single page all elements are called through JavaScript Dynamic programming.
 
 ## 🛠 Walk through <a name="walk-through"></a>
@@ -125,7 +120,6 @@ Music Track Website: mobile-first approach & responsive on desktop version and b
   </ul>
 </details>
 
-<!-- Features -->
 ### Tools <a name="tools"></a>
   <details>
     <summary>Code Convention, Code Analysis</summary>
@@ -157,7 +151,6 @@ Music Track Website: mobile-first approach & responsive on desktop version and b
 
 ### Key Features <a name="key-features"></a>
 
-<!-- > Describe between 1-3 key features of the application. -->
 - Mobile First Approach
 - Responsive Website
 - Button Interactions (i.e. hover, etc.)
@@ -249,9 +242,9 @@ This project is deployed at github pages you can clone it here. [Please click to
 
 👤 **Captain Bawa**
 
-- GitHub: [@harshi0102](https://github.com/harshi0102)
-- Twitter: [@harshika0102me](https://twitter.com/harshika0102me)
-- LinkedIn: [harshikagovind](https://linkedin.com/in/harshikagovind)
+- GitHub: [@CaptainBawa](https://github.com/CaptainBawa)
+- Twitter: [@BawaCollins](https://twitter.com/BawaCollins)
+- LinkedIn: [collinsbawa](https://www.linkedin.com/in/captainbawa/)
 
 
 
