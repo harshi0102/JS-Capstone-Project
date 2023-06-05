@@ -46,7 +46,7 @@
 
 Will start by building the core functionalities. At the very beginning the web will look similar to the UI below. Note that it will allow to add like and comment. However we have not added the reservation system.
 ![image](https://github.com/harshi0102/JS-Capstone-Project/assets/108334376/03a199f0-55e4-4797-814b-a078902dd7ef)
-
+![image](https://github.com/harshi0102/JS-Capstone-Project/assets/108334376/50ef418d-41f6-4f03-a7f7-e3ab30360948)
 <p align="center">
   <img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81pcJFgdY1_v26S9vs_hPgiaznNUWrvGsU2lcsgy0bqs9pZE0BjUmZ_EHSUZ84OqPeU6UUXp4g3233GKZMQh2FtgMMIe4Q=w1600-h795" alt="Basic UI" width="600px" />
 </p>
