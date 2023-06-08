@@ -1,6 +1,8 @@
 const getComments = async (itemId) => {
   try {
-    const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/kOjkqwEwPrgtqCjTWn0f/comments?item_id=${itemId}`);
+    const response = await fetch(
+      `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/kOjkqwEwPrgtqCjTWn0f/comments?item_id=${itemId}`,
+    );
     const data = await response.json();
     return data;
   } catch (error) {
@@ -9,15 +11,18 @@ const getComments = async (itemId) => {
 };
 
 const addComment = async (itemId, name, comment) => {
-  await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/kOjkqwEwPrgtqCjTWn0f/comments', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      item_id: itemId,
-      username: name,
-      comment,
-    }),
-  });
+  await fetch(
+    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/kOjkqwEwPrgtqCjTWn0f/comments',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        item_id: itemId,
+        username: name,
+        comment,
+      }),
+    },
+  );
 };
 
 const commentsPopUp = () => {
@@ -30,7 +35,13 @@ const commentsPopUp = () => {
     popup.classList.add('popup');
 
     const closeBtn = document.createElement('div');
-    closeBtn.classList.add('close-btn', 'text-4xl', 'pb-2', 'cursor-pointer', 'text-right');
+    closeBtn.classList.add(
+      'close-btn',
+      'text-4xl',
+      'pb-2',
+      'cursor-pointer',
+      'text-right',
+    );
     closeBtn.innerHTML = '&times;';
     closeBtn.addEventListener('click', () => {
       popup.remove();
@@ -42,28 +53,47 @@ const commentsPopUp = () => {
 
     const popupImg = document.createElement('img');
     // popupImg.classList.add('')
-    popupImg.src = data.images?.coverart || data.images?.background || `https://dummyimage.com/400x400/000/1aff00&text=${data.title}`;
+    popupImg.src = data.images?.coverart
+      || data.images?.background
+      || `https://dummyimage.com/400x400/000/1aff00&text=${data.title}`;
 
-    const popupTitle = document.createElement('h3');
-    popupTitle.classList.add('text-3xl', 'font-bold', 'pt-4');
+    const popupTitle = document.createElement('a');
+    popupTitle.classList.add(
+      'text-2xl',
+      'font-bold',
+      'hover:text-[#1ED760]',
+      'cursor-pointer',
+      'pt-4',
+    );
     popupTitle.innerHTML = data.title;
+    popupTitle.setAttribute('href', data.url);
+    popupTitle.setAttribute('target', '_blank');
 
     const artist = document.createElement('h4');
-    artist.classList.add('text-[#777]', '-mt-2');
+    artist.classList.add('text-[#777]', 'text-lg', 'uppercase', '-mt-2');
     artist.innerHTML = data.artists[0].alias;
 
     const commentsTitle = document.createElement('h3');
     const comments = await getComments(data.key);
 
     commentsTitle.classList.add('text-[#1ED760]', 'mt-4');
-    commentsTitle.textContent = `Comments (${comments.length ? comments.length : '0'})`;
+    commentsTitle.textContent = `Comments (${
+      comments.length ? comments.length : '0'
+    })`;
 
     const commentList = document.createElement('ul');
     commentList.classList.add('comment-list');
     if (comments.length > 0) {
       comments.forEach((comment) => {
         const commentItem = document.createElement('li');
-        commentItem.innerHTML = `${comment.creation_date} <strong>${comment.comment} : </strong>  ${comment.username}`;
+        commentItem.innerHTML = `<div class="grid grid-cols-3">
+        <div>
+          ${comment.creation_date} 
+        </div>
+        <div class="text-left col-span-2">
+        <strong>${comment.comment} : </strong> ${comment.username}
+        </div>
+      </div>`;
         commentList.appendChild(commentItem);
       });
     } else {
@@ -138,7 +168,9 @@ const commentsPopUp = () => {
     likeBtn.addEventListener('click', async () => {
       pop.setAttribute('style', 'display: block;');
       const cardKey = likeBtn.parentNode.parentNode.parentNode.id;
-      const data = JSON.parse(localStorage.getItem('songs')).find((song) => song.key === cardKey);
+      const data = JSON.parse(localStorage.getItem('songs')).find(
+        (song) => song.key === cardKey,
+      );
       createPopup(data);
     });
   });

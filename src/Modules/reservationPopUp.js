@@ -1,6 +1,8 @@
 const getReservation = async (itemId) => {
   try {
-    const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/zRod3rPxBRjxEDaYzujw/reservations?item_id=${itemId}`);
+    const response = await fetch(
+      `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/zRod3rPxBRjxEDaYzujw/reservations?item_id=${itemId}`,
+    );
     const data = await response.json();
     return data;
   } catch (error) {
@@ -9,16 +11,19 @@ const getReservation = async (itemId) => {
 };
 
 const addReservation = async (itemId, name, dateStart, dateEnd) => {
-  const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/zRod3rPxBRjxEDaYzujw/reservations', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      item_id: itemId,
-      username: name,
-      date_start: dateStart,
-      date_end: dateEnd,
-    }),
-  });
+  const response = await fetch(
+    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/zRod3rPxBRjxEDaYzujw/reservations',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        item_id: itemId,
+        username: name,
+        date_start: dateStart,
+        date_end: dateEnd,
+      }),
+    },
+  );
 
   if (!response.ok) {
     const errorMessage = await response.text();
@@ -44,7 +49,13 @@ const reservationPopUp = () => {
     popup.classList.add('popup');
 
     const closeBtn = document.createElement('div');
-    closeBtn.classList.add('close-btn', 'text-4xl', 'py-2', 'cursor-pointer', 'text-right');
+    closeBtn.classList.add(
+      'close-btn',
+      'text-4xl',
+      'py-2',
+      'cursor-pointer',
+      'text-right',
+    );
     closeBtn.innerHTML = '&times;';
     closeBtn.addEventListener('click', () => {
       popup.remove();
@@ -55,7 +66,9 @@ const reservationPopUp = () => {
     popupImgContainer.classList.add('img-container');
 
     const popupImg = document.createElement('img');
-    popupImg.src = data.images?.coverart || data.images?.background || `https://dummyimage.com/400x400/000/1aff00&text=${data.title}`;
+    popupImg.src = data.images?.coverart
+      || data.images?.background
+      || `https://dummyimage.com/400x400/000/1aff00&text=${data.title}`;
 
     const popupTitle = document.createElement('h3');
     popupTitle.classList.add('text-3xl', 'font-bold');
@@ -64,25 +77,29 @@ const reservationPopUp = () => {
     const commentsTitle = document.createElement('h3');
     commentsTitle.id = 'reservation-counter';
 
-    const reservations = getReservation(data.key).then((res) => {
-      if (res.error) {
+    const reservations = getReservation(data.key)
+      .then((res) => {
+        if (res.error) {
+          commentsTitle.textContent = 'Reservations (0)';
+        } else {
+          commentsTitle.textContent = `Reservations (${res.length})`;
+          // console.log('---++++', res)
+          let htmlToAppend = '';
+          res.forEach((item) => {
+            const html = `<li>${item.date_start} - ${item.date_end} || by <strong> ${item.username}</strong></li>`;
+            htmlToAppend += html;
+          });
+          const reserveList = document.querySelector('.comment-list');
+          reserveList.innerHTML = htmlToAppend;
+        }
+      })
+      .catch((err) => {
         commentsTitle.textContent = 'Reservations (0)';
-      } else {
-        commentsTitle.textContent = `Reservations (${res.length})`;
-        // console.log('---++++', res)
-        let htmlToAppend = '';
-        res.forEach((item) => {
-          const html = `<li>${item.date_start} - ${item.date_end} || by <strong> ${item.username}</strong></li>`;
-          htmlToAppend += html;
-        });
-        const reserveList = document.querySelector('.comment-list');
-        reserveList.innerHTML = htmlToAppend;
-      }
-    }).catch((err) => {
-      commentsTitle.textContent = 'Reservations (0)';
-      throw new Error(err);
-    });
-    commentsTitle.textContent = `Reservations (${reservations === undefined ? '0' : reservations?.length})`;
+        throw new Error(err);
+      });
+    commentsTitle.textContent = `Reservations (${
+      reservations === undefined ? '0' : reservations?.length
+    })`;
 
     const commentList = document.createElement('ul');
     commentList.id = 'comment-list';
@@ -126,7 +143,9 @@ const reservationPopUp = () => {
     const form = document.createElement('form');
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      const nameInput = event.target.querySelector('.comment-input').value.trim();
+      const nameInput = event.target
+        .querySelector('.comment-input')
+        .value.trim();
 
       const startDate = event.target.querySelector('.name-input').value.trim();
       // const startDateFormat = new Date(startDate);
@@ -144,7 +163,9 @@ const reservationPopUp = () => {
           commentItem.innerHTML = `${startDate} - ${endDate} by </strong> ${nameInput} <strong>`;
           commentList.appendChild(commentItem);
 
-          commentsTitle.textContent = `Reservations (${reservations?.length === 0 ? '0' : reservations.length})`;
+          commentsTitle.textContent = `Reservations (${
+            reservations?.length === 0 ? '0' : reservations.length
+          })`;
 
           if (reservations.length === 0) {
             const theNoReservToRemove = document.getElementById('no-reserv-yet');
@@ -186,7 +207,9 @@ const reservationPopUp = () => {
     reserveBtn.addEventListener('click', async () => {
       pop.setAttribute('style', 'display: block;');
       const cardKey = reserveBtn.parentNode.parentNode.parentNode.id;
-      const data = JSON.parse(localStorage.getItem('songs')).find((song) => song.key === cardKey);
+      const data = JSON.parse(localStorage.getItem('songs')).find(
+        (song) => song.key === cardKey,
+      );
       createPopup(data);
     });
   });

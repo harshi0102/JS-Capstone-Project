@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 .pop,
@@ -11,14 +12,15 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   backdrop-filter: blur(7px);
-  padding: 3%;
+  padding: 1.5%;
 }
 
 .popup {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: black;
   padding: 0 1.25em 1.25em 1.25em;
-  width: 70%;
-  max-height: 95%;
+  width: 90%;
+  max-width: 550px;
+  max-height: 100%;
   overflow-y: auto;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -32,7 +34,10 @@
 
 .img-container {
   overflow: hidden;
-  max-height: 45vh;
+  max-height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .img-container img {
@@ -40,13 +45,14 @@
 }
 
 .popup-content {
-  background-color: black;
-  padding: 10px;
+  background: linear-gradient(-45deg, #35f80415, #001aff15, #fc049520, #cd04ff20);
+  padding: 20px;
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
   border-style: solid;
   border-width: 2px;
+  border-radius: 20px;
   border-color: white;
   text-align: center;
   gap: 10px;
@@ -60,16 +66,12 @@
   text-align: center;
 }
 
-.comment-input {
-  color: black;
-  width: 50%;
-  height: 5vh;
-}
-
+.comment-input,
 .name-input {
   color: black;
-  width: 50%;
-  height: 15vh;
+  border-radius: 4px;
+  padding-left: 8px;
+  height: 40px;
 }
 
 .start-date-input,
@@ -119,4 +121,12 @@ form > button {
 
 .custom-h {
   height: 5vh;
+}
+
+.image-container img {
+  transition: transform 3s ease;
+}
+
+.image-container:hover img {
+  transform: scale(1.1);
 }
