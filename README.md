@@ -45,19 +45,17 @@
 - A popup window with more data about an item that you can use to comment on it or reserve it for a period of time.
 
 Will start by building the core functionalities. At the very beginning the web will look similar to the UI below. Note that it will allow to add like and comment. However we have not added the reservation system.
-![image](https://github.com/harshi0102/JS-Capstone-Project/assets/108334376/03a199f0-55e4-4797-814b-a078902dd7ef)
-![image](https://github.com/harshi0102/JS-Capstone-Project/assets/108334376/50ef418d-41f6-4f03-a7f7-e3ab30360948)
+
+<!-- ![image](https://github.com/harshi0102/JS-Capstone-Project/assets/108334376/03a199f0-55e4-4797-814b-a078902dd7ef)
+![image](https://github.com/harshi0102/JS-Capstone-Project/assets/108334376/50ef418d-41f6-4f03-a7f7-e3ab30360948) -->
+
 <p align="center">
-  <img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81pcJFgdY1_v26S9vs_hPgiaznNUWrvGsU2lcsgy0bqs9pZE0BjUmZ_EHSUZ84OqPeU6UUXp4g3233GKZMQh2FtgMMIe4Q=w1600-h795" alt="Basic UI" width="600px" />
+  <img src="./src/assets/js-01.png" alt="Basic UI" width="1000px" />
 </p>
 <p align="center">
-  <img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81qVPXhX1B7E59IWv0I20Hi7j9Gd8f6FPeHkcqpSnVbkb2QVzHNL4jhIqhgDsZsT9EEmVGMO1jkcbpwNAgywkWmbiOVflQ=w1600-h795" alt="Basic UI" width="400px" />
-</p>
-<p align="center">
-  <img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81oehQWHriSy-2kVEhD4MagG_8va05IYwaQFfJ5is0_ze2jdKBBca727JN49DZNpxjNU2R4-pvPd53EbOmmm0PWYTxRP=w1600-h795" alt="Basic UI" width="300px" />
-</p>
-<p align="center">
-  <img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81oMYxkQyB4MoOSfgFiJR9IX1ImWKVVVLjBotVnEPm6u2FImPsBrAv5KFljk7IGHAmq3hTETAOLWIBaFac6HEeUX83nw=w1280-h919" alt="Basic UI" width="300px" />
+  <img src="./src/assets/js-03.png" alt="Basic UI" width="350px" />
+  <img src="./src/assets/js-02.png" alt="Basic UI" width="410px" />
+  <img src="./src/assets/js-04.png" alt="Basic UI" width="350px" />
 </p>
 
 <!-- > Describe your project in 1 or 2 sentences. -->
@@ -177,7 +175,7 @@ Music Track Website: mobile-first approach & responsive on desktop version and b
 
 ## 🚀 Live Recording <a name="live-demo"></a>
 
-[The recording](https://drive.google.com/file/d/1AAU3Hjf35n3r7E0hE_cEftdkBdNJQ-e1/view?usp=sharing )
+[The recording](https://drive.google.com/file/d/1AAU3Hjf35n3r7E0hE_cEftdkBdNJQ-e1/view?usp=sharing)
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
